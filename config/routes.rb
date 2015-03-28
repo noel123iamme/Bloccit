@@ -1,5 +1,5 @@
-#Rails.application.routes.draw do
-Bloccit::Application.routes.draw do
+Rails.application.routes.draw do
+  resources :advertisements
   resources :posts
 
   get 'about' => 'welcome#about'
