@@ -1,52 +1,56 @@
 require 'faker'
 
-Post.delete_all
-Comment.delete_all
-Advertisement.delete_all
+# Create Users
+5.times do
+  user = User.new(
+    name:     Faker::Name.name, 
+    email:    Faker::Internet.email,
+    password: Faker::Lorem.characters(10),
+    role:     ''
+  )
+  user.skip_confirmation!
+  user.save!
+end
+
+# Note: by calling `User.new` instead of `create`,
+# we create an instance of User which isn't immediately saved to the database.
+ 
+# The `skip_confirmation!` method sets the `confirmed_at` attribute
+# to avoid triggering an confirmation email when the User is saved.
+ 
+# The `save` method then saves this User to the database.
+user = User.new(
+  name:     'Admin User', 
+  email:    'admin@bloccit.com',
+  password: 'helloworld',
+  role:     'admin'
+)
+user.skip_confirmation!
+user.save!
+
+users = User.all
 
 # Create Posts
 50.times do 
   Post.create!(
+    user:  users.sample,
     title: Faker::Lorem.sentence,
-    body:  Faker::Lorem.paragraphs
+    body:  Faker::Lorem.paragraph
   )
 end
-
-# Create unique post
-if Post.where({title: "My unique post"}).count == 0
-  Post.create!(
-    title: "My unique post",
-    body:  "Body text of my unique post"
-  )
-end
-
 posts = Post.all
 
 # Create Comments
 100.times do
   Comment.create!(
+    # user: users.sample,   # we have not yet associated Users with Comments
     post: posts.sample,
-    body: Faker::Lorem.paragraphs
+    body: Faker::Lorem.paragraph
   )
-end
-
-# Create unique comment
-if Comment.where({body: "My unique comment"}).count == 0
-  Comment.create!(
-    post: posts.sample,
-    body: "My unique comment"
-  ) 
 end
 
 puts "Seed finished"
+puts "#{User.count} users created"
 puts "#{Post.count} posts created"
-puts "#{Comment.count} comments create"
+puts "#{Comment.count} comments created"
 
-# Create Advertisements
-10.times do 
-  Advertisement.create!(
-    title: Faker::Internet.domain_name,
-    copy: Faker::Company.catch_phrase,
-    price: 0
-  )
-end
