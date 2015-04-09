@@ -4,8 +4,12 @@
       <%= @post.title %>
     </h1>
     <p><%= @post.body %></p>
+    <small>
+      submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %><br>
+      <%= @post.comments.count %> Comments<br>
+    </small>
     <% if policy(@post).edit? %>
-      <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-success' %>
+      <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
     <% end %>
   </div>
 </div>

@@ -19,32 +19,56 @@ end
 # to avoid triggering an confirmation email when the User is saved.
  
 # The `save` method then saves this User to the database.
-user = User.new(
-  name:     'Admin User', 
-  email:    'admin@bloccit.com',
-  password: 'helloworld',
-  role:     'admin'
-)
-user.skip_confirmation!
-user.save!
+if User.where({email: 'admin@bloccit.com'}).count == 0
+  user = User.new(
+    name:     'Admin User', 
+    email:    'admin@bloccit.com',
+    password: 'helloworld',
+    role:     'admin'
+  )
+  user.skip_confirmation!
+  user.save!
+end
 
-user = User.new(
-  name:     'Noel Deguzman', 
-  email:    'noel@bloccit.com',
-  password: 'helloworld',
-  role:     'member'
-)
-user.skip_confirmation!
-user.save!
+if User.where({email: 'moderator@bloccit.com'}).count == 0
+  user = User.new(
+    name:     'Moderator User', 
+    email:    'moderator@bloccit.com',
+    password: 'helloworld',
+    role:     'moderator'
+  )
+  user.skip_confirmation!
+  user.save!
+end
+
+if User.where({email: 'noel@bloccit.com'}).count == 0
+  user = User.new(
+    name:     'Noel Deguzman', 
+    email:    'noel@bloccit.com',
+    password: 'helloworld'
+  )
+  user.skip_confirmation!
+  user.save!
+end
 
 users = User.all
+
+# Create Topics
+15.times do
+  Topic.create!(
+    name:        Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph
+  )
+end
+topics = Topic.all
 
 # Create Posts
 50.times do 
   Post.create!(
-    user:  users.sample,
-    title: Faker::Lorem.sentence,
-    body:  Faker::Lorem.paragraph
+    user:   users.sample,
+    topic: topics.sample,
+    title:  Faker::Lorem.sentence,
+    body:   Faker::Lorem.paragraph
   )
 end
 posts = Post.all
@@ -60,6 +84,7 @@ end
 
 puts "Seed finished"
 puts "#{User.count} users created"
+puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 
