@@ -28,6 +28,15 @@ user = User.new(
 user.skip_confirmation!
 user.save!
 
+user = User.new(
+  name:     'Noel Deguzman', 
+  email:    'noel@bloccit.com',
+  password: 'helloworld',
+  role:     'member'
+)
+user.skip_confirmation!
+user.save!
+
 users = User.all
 
 # Create Posts
