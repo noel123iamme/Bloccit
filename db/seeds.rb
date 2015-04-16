@@ -1,3 +1,4 @@
+=begin
 require 'faker'
 
 # Create Users
@@ -88,3 +89,4 @@ puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 
+=end
