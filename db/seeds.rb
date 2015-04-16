@@ -82,9 +82,18 @@ posts = Post.all
   )
 end
 
+# Create Comments
+25.times do
+  Summary.create!(
+    # user: users.sample,   # we have not yet associated Users with Comments
+    post: posts.sample,
+    body: Faker::Lorem.paragraph
+  )
+end
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-
+puts "#{Summary.count} summaries created"

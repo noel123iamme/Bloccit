@@ -9,7 +9,13 @@
       <%= @post.comments.count %> Comments<br>
     </small>
     <% if policy(@post).edit? %>
-      <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+      <%= link_to "Edit Post", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+    <% end %>
+    <% if @summary %>
+      <h4 class="media-heading"><%= @summary.body %></h4>
+      <%= link_to "Edit Summary", edit_topic_post_summary_path(@topic, @post, @summary), class: 'btn btn-success' %>
+    <% else %>
+      <%= link_to "New Summary", new_topic_post_summary_path(@topic, @post), class: 'btn btn-success' %>
     <% end %>
   </div>
 </div>
