@@ -1,9 +1,9 @@
 <div class="media">
   <div class="media-body">
     <h1 class="media-heading">
-      <%= markdown_to_html @post.title %>
+      <%= @post.markdown_title %>
     </h1>
-    <p><%= markdown_to_html @post.body %></p>
+    <p><%= @post.markdown_body %></p>
     <small>
       submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %><br>
       <%= @post.comments.count %> Comments<br>
