@@ -43,12 +43,16 @@ if User.where({email: 'moderator@bloccit.com'}).count == 0
 end
 
 if User.where({email: 'noel@bloccit.com'}).count == 0
+  uploader = AvatarUploader.new
+  uploader.store!('Users/Home/Desktop/IMG_0097.JPG')
   user = User.new(
     name:     'Noel Deguzman', 
     email:    'noel@bloccit.com',
     password: 'helloworld'
   )
   user.skip_confirmation!
+  #user.avatar = params[:file]
+  user.avatar = uploader.retrieve_from_store!('Users/Home/Desktop/IMG_0097.JPG')
   user.save!
 end
 

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update_attributes(user_params)
-      flash[:notic] = "User information udpated"
+      flash[:notice] = "User information udpated"
       redirect_to edit_user_registration_path
     else
       flash[:error] = "Invalid user information"
@@ -14,6 +14,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :avatar, :avatar_cache)
   end
 end

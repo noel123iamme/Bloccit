@@ -3,8 +3,16 @@
     <h1 class="media-heading">
       <%= @post.markdown_title %>
     </h1>
-    <p><%= @post.markdown_body %></p>
+    <div class="row">
+      <div class="col-md-8">
+        <p><%= @post.markdown_body %></p>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag(@post.image.url) if @post.image? %>
+      </div>
+    </div>
     <small>
+      <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
       submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %><br>
       <%= @post.comments.count %> Comments<br>
     </small>
