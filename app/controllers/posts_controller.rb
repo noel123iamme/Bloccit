@@ -1,4 +1,10 @@
 class PostsController < ApplicationController
+  def index
+    @topic = Topic.find(params[:topic_id])
+    @posts = @topic.post.per_page(100)
+    authorize @posts
+  end
+
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
