@@ -21,6 +21,8 @@
     <% end %>
   </div>
   <div>
+    <% if policy(@comment).create? %>
     <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+    <% end %>
   </div>
 </div>
