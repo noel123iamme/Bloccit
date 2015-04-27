@@ -33,4 +33,11 @@ class Post < ActiveRecord::Base
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
   end
+
+  def save_with_intial_vote
+    ActiveRecord::Base.transaction do
+      save
+      create_vote
+    end
+  end
 end
