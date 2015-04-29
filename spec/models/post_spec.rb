@@ -31,10 +31,10 @@ describe Post do
 
     describe '#create_vote' do
       it "generates an up_vote when explicitly called" do
-        post = associated_post
-        expect(post.up_votes).to eq(0)
-        post.create_vote
-        expect(post.up_votes).to eq(1)
+        @post = associated_post
+        expect(@post.up_votes).to eq(0)
+        @post.create_vote
+        expect(@post.up_votes).to eq(1)
       end
     end
   end

@@ -19,11 +19,11 @@ describe Vote do
   end
 
   describe 'after_save' do
-    it "calls `Post#update_rake` after save" do
-      user = authenticated_user
-      post = associated_post
-      vote = Vote.new(value: 1, post: post)
-      expect(post).to receive(:update_rank)
+    it "calls `Post#update_rank` after save" do
+      @user = authenticated_user
+      @post = associated_post
+      vote = Vote.new(value: 1, post: @post)
+      expect(@post).to receive(:update_rank)
       vote.save
     end
   end
