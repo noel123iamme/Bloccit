@@ -34,7 +34,7 @@ end
 if User.where({email: 'noel@bloccit.com'}).count == 0
   user = User.new(
     name:     'Noel Deguzman', 
-    email:    'noel@bloccit.com',
+    email:    'noel.deguzman@me.com',
     password: 'helloworld'
   )
   user.skip_confirmation!
