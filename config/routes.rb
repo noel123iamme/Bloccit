@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:update]
+  resources :users, only: [:show, :update]
 
   resources :topics do
     resources :posts, except: [:index]
   end
 
-  resources :posts, only: [] do
+#  resources :posts, only: [] do
+  resources :posts do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
 
