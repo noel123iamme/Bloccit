@@ -2,7 +2,7 @@ if Rails.env.development?
 require 'faker'
 
 # Create Users
-5.times do
+15.times do
   user = User.new(
     name:     Faker::Name.name, 
     email:    Faker::Internet.email,
@@ -43,7 +43,7 @@ end
 users = User.all
 
 # Create Topics
-15.times do
+50.times do
   Topic.create!(
     name:        Faker::Lorem.sentence,
     description: Faker::Lorem.paragraph
@@ -52,7 +52,7 @@ end
 topics = Topic.all
 
 # Create Posts
-50.times do 
+500.times do 
   post = Post.create!(
     user:   users.sample,
     topic:  topics.sample,
@@ -66,7 +66,7 @@ end
 posts = Post.all
 
 # Create Comments
-100.times do
+2000.times do
   Comment.create!(
     user: users.sample,
     post: posts.sample,

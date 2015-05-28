@@ -3,10 +3,10 @@ module TestFactories
     post_options = {
       title: 'Post title',
       body: 'Post bodies must be pretty long.',
-      topic: Topic.create(name: 'Topic name'),
+      topic: Topic.create!(name: 'Topic name', description: 'Say anything that is at least 20 characters', public: true),
       user: authenticated_user
     }.merge(options)
-    Post.create(post_options)
+    Post.create!(post_options)
   end
 
   def authenticated_user(options={})
