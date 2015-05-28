@@ -13,6 +13,9 @@ group :development do
   gem 'rails-erd'
   gem 'pry-rails'
 end
+group :production, :development do
+  gem 'puma'
+end
  # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
