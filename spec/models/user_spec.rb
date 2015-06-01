@@ -5,8 +5,8 @@ describe User do
 
   describe "#favorited(post)" do
     before do
-      @post = associated_post
-      @user = authenticated_user
+      @user = create(:user_with_post_and_comment)
+      @post = @user.posts.first
     end
 
     it "returns 'nil' if the user has not favorited the post" do
@@ -19,8 +19,8 @@ describe User do
     end
 
     it "returns 'nil' if the user has favorited another post" do
-        post2 = associated_post(title: "Post 2")
-        favorite = @user.favorites.create(post: post2)
+        post2 = create(:post, title: "Post 2", user: @user)
+        @user.favorites.create(post: post2)
         expect(@user.favorited(@post)).to eq(nil)
     end
   end
@@ -28,13 +28,8 @@ describe User do
    describe ".top_rated" do
  
      before do
-       @user1 = create(:user)
-       post = create(:post, user: @user1)
-       create(:comment, user: @user1, post: post)
- 
-       @user2 = create(:user)
-       post = create(:post, user: @user2)
-       2.times { create(:comment, user: @user2, post: post) }
+       @user1 = create(:user_with_post_and_comment)
+       @user2 = create(:user_with_post_and_comment, comments_count: 2)
      end
  
      it "returns users ordered by comments + posts" do
