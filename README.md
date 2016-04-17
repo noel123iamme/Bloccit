@@ -2,4 +2,4 @@
 
 Made with my mentor at [Bloc](http://bloc.io).
 
-Heroku-approved app name "enigmatic-sea-6961"
+Heroku-approved app name "bloccit-noel123iamme" [Demo](https://bloccit-noel123iamme.herokuapp.com/)
